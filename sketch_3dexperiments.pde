@@ -21,7 +21,13 @@ void setup() {
   upY = 1;
   upZ = 0;
   leftRightHeadAngle = radians(270);
-  noCursor();
+  //noCursor();
+  try {
+    rbt = new Robot();
+  }
+  catch(Expection e) {
+    e.printStackTrace();
+  }
 }
 
 void draw() {
@@ -74,7 +80,9 @@ void controlCamera() {
   focusY = eyeY + tan(upDownHeadAngle)*300;
   focusZ = eyeZ + sin(leftRightHeadAngle)*300;
 
-  println(eyeX, eyeY, eyeZ);
+  if (mouseX > width-2) rbt.mouseMove(3, mouseY);
+  else if (mouseX < 2) rbt.mouseMove(width-3, mouseY);
+  
 }
 
 void keyPressed() {
